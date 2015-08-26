@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class Images{
             int height = bufferedImage1.getHeight();
             int width = bufferedImage1.getWidth();
             //i need this variables to solve how much times the loop must do
-           // BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB );
+            BufferedImage result = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB );
             //I have created the third image that'll include the differences
             List<Integer> differencesX = new ArrayList<>();
             List<Integer> differencesY = new ArrayList<>();
@@ -31,19 +32,30 @@ public class Images{
                 for (int j = 0; j < width; j++){
                     int pixel1 = bufferedImage1.getRGB( j, i );
                     int pixel2 = bufferedImage2.getRGB( j, i );
+                    result.setRGB(j, i, pixel1);
 
-                    if ((pixel1 < ((pixel2/10)*9)) || (pixel2 <((pixel1/10)*9))){
+                    if (pixel1 != pixel2){
                         differencesX.add(j);
                         differencesY.add(i);
                     }
                 }
             }
 
-            for( int i = 0; i < differencesX.size(); i++){
-                System.out.println(differencesX.get(i) + " " + differencesY.get(i));
+            for(int i = 0; i < (differencesX.size()-1); i++){
+                /*int pixel3 = result.getRGB(differencesX.get(i), differencesY.get(i));
+                if(differencesY.get(i) == differencesY.get(i+1)){
+                    pixel3 = BufferedImage.TYPE_INT_BGR;
+                }*/
+                result.setRGB(differencesX.get(i),differencesY.get(i),BufferedImage.TYPE_INT_RGB);
             }
+
+            ImageIO.write(result, "png", new File("D:\\java\\ImageCompare\\src\\resources\\result.png"));
+
+            System.out.println(differencesX.size());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 }
