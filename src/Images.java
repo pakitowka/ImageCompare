@@ -28,7 +28,7 @@ public class Images{
             List<Integer> differencesY = new ArrayList<>();
 
             for (int i = 0; i < height; i++){
-                for (int j = 0; i < width; j++){
+                for (int j = 0; j < width; j++){
                     int pixel1 = bufferedImage1.getRGB( j, i );
                     int pixel2 = bufferedImage2.getRGB( j, i );
 
