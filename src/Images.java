@@ -46,6 +46,4 @@ public class Images{
             e.printStackTrace();
         }
     }
-
-
 }
